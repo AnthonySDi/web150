@@ -1,0 +1,75 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Untitled Document</title>
+
+		<!--Remy Sharp Shim --> 
+		<!--[if lte IE 9]> 
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" >
+		</script> 
+		<![endif]-->
+
+		<link href="css/reset.css" type="text/css" rel="stylesheet">
+		<link href="css/styles.css" type="text/css" rel="stylesheet">
+		
+
+	</head>
+	<body>
+		<div id="wrapper">
+			<main>
+				<script>
+					translateThis(prompt("Please enter your word or phrase"));
+					
+					function translateThis(Sentence)
+					{
+
+						var vowels =/[aeiou]/;
+						var pigText = '';
+						var lowerSentence = Sentence.toLowerCase();  // convert to lowercase
+						var words = lowerSentence.split(" "); // creates array of words
+
+						for (var i in words) {
+							var word = words[i];
+  
+							if(word.match(vowels).index==0){
+								pigText = word + 'way ';
+							}
+							else {
+								pigText = word.substr(word.match(vowels).index,word.length) + word.substr(0, word.match(vowels).index) + 'ay ';
+							}
+							document.write(pigText);
+						} // end of for loop
+					} // end of function
+				</script>
+				
+				
+			</main>
+			
+			<aside>
+			
+			<h3>
+				Psuedologic
+			</h3>
+			<p>
+				Ask for phrase
+			</p>
+			<p>
+				Convert phrase to lower case
+			</p>
+			<p>
+				split phrase into words
+			</p>		
+			<p>
+				Check words, move letters add ay or way
+			</p>
+			<p>
+				Print to screen
+			</p>
+			</aside>
+
+
+
+
+		</div>
+	</body>
+</html>
