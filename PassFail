@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="class.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>    
+</head>
+<body>
+    <h1>Functions & validation</h1>
+
+    <form id="form1" action="#" onsubmit="return validateForm(this);">
+        first name: <input type="text" name="firstname"><br>
+        last name: <input type="text" name="lastname"><br>
+        password: <input type="text" name="password"><br>
+
+        <button>Check</button>
+    </form>
+
+    <hr><div id="message"></div>
+
+    <script>
+
+        function validateForm(myForm) {
+
+            var firstname = myForm.firstname.value; // get text of firstname field
+            var lastname = myForm.lastname.value;
+            var password = myForm.password.value;
+
+
+            if (firstname.length == 0 && lastname.length == 0) {
+                $("#message").html("ERROR:VF1 Must Enter first and last name");
+            } else if(!validatePassword(password)){
+                $("#message").html("ERROR:VP1 Invalid Password: Passwords must be at least characters long with at least one upper case and lower case letter");
+            } else {
+                $("#message").html("YAY!!! You can follow instructions");
+            }
+
+              // use this syntax to update 'message' DIV with appropriate wording
+              // $("#message").html("message");
+
+              /* Form validation code goes here
+              */
+
+            return false; // prevent page reload
+        } // End of function ValidateForm 
+
+
+        function validatePassword(password) {
+            var thePass = password;
+
+
+            if (thePass.length < 8) {
+                return false;
+            } else if (thePass == thePass.toUpperCase()) {
+                return false;
+            } else if (thePass == thePass.toLowerCase()) {
+                return false;
+            } else {
+                return true;
+
+            } // End of Function Validate Password
+        }
+    </script>
+
+    <!-- 
+        var grades = "jim|25, sue|32, mary|34, ann|22, ted|28, frank|15, lisa|19, mike|30, ahn|26, vishaya|27";
+
+        var students = grades.split(", ").sort();
+        var total = 0;
+        var min = 100;
+        var max = 0;
+
+        for (var index in students) {
+            var currentStudent = students[index].split("|");
+            console.log(currentStudent);
+
+
+            document.write("<li>" + currentStudent[0] + " - " + currentStudent[1] + "</li>");
+
+
+            var score = parseInt(currentStudent[1]);
+
+            total += score;
+
+            if (score > max) {
+                max = score;
+            }
+            if (score < min) {
+                min = score;
+            }
+
+
+        }
+
+        document.write("Average: " + total/students.length + "<br/>")
+        document.write("Highest: " + max + "<br/>")
+        document.write("Lowest: " + min + "<br/>")
+
+   -->
+
+</body>
+</html>
