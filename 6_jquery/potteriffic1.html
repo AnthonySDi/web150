@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <style>
+        .over {
+            background-color: orange;
+        }
+
+        .selected {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <script>
+
+
+        var characters = [
+        {name:"Albus Dumbledore", role:"staff", house:"Gryffindor",gender:"m",alignment:"good"},
+        {name:"Nymphadora Tonks", role:"", house:"Hufflepuff",gender:"f",alignment:"good"},
+        {name:"Ron Weasley", role:"student", house:"Gryffindor",gender:"m",alignment:"good"},
+        {name:"Ginny Weasley", role:"student", house:"Gryffindor",gender:"f",alignment:"good"},
+        {name:"Hermione Granger", role:"student", house:"Gryffindor",gender:"f",alignment:"good"},
+        {name:"Mad-eye Moody", role:"staff", house:"",gender:"m",alignment:"good"},
+        {name:"Prof McGonagall", role:"staff", house:"Gryffindor",gender:"f",alignment:"good"},
+        {name:"Harry Potter", role:"student", house:"Gryffindor",gender:"m",alignment:"good"},
+        {name:"Draco Malfoy", role:"student", house:"Slytherin",gender:"m",alignment:"evil"},
+        {name:"Hagrid", role:"staff", house:"Gryffindor",gender:"m",alignment:"good"},
+        {name:"Luna Lovegood", role:"student", house:"Ravenclaw",gender:"f",alignment:"good"},
+        {name:"Voldemort", role:"", house:"Slytherin",gender:"m",alignment:"evil"},
+        {name:"Bellatrix Lestrange", role:"", house:"Slytherin",gender:"f",alignment:"evil"},
+        {name:"Severus Snape", role:"staff", house:"Slytherin",gender:"m",alignment:"?"},
+        {name:"Dobby", role:"", house:"",gender:"?",alignment:"good"}
+        ];
+
+    // add rows to table
+
+        // generate button for each unique house
+        // add button to reset table rows
+        $(document).ready(function() {
+            var houses = [];
+            for (var row in characters) {
+                $("table").append("<tr><td>"
+                    + characters[row].name + "</td><td>"
+                    + characters[row].role + "</td><td>"
+                    + characters[row].house + "</td><td>"
+                    + characters[row].gender + "</td><td>"
+                    + characters[row].alignment + "</td></tr>");
+
+                var house = characters[row].house;
+
+                if (houses.indexOf(house) == -1) {
+                    houses.push(house);
+                    $('#buttons').append("<button>" + house + "</button>");
+                }
+            }// end for
+
+
+            var buttons = $('button');
+            buttons.on("mouseenter", function (e) {
+                var $this = $(this);
+                $this.addClass("over");
+            });
+
+            buttons.on('mouseleave', function () {
+                var $this = $(this);
+                $this.removeClass("over");
+            });
+
+            buttons.on('click', function () {
+                //$(".selected").removeClass("selected");
+                //$(this).addClass("selected");
+                //$(tr).toggle($(this).text());
+                var rows = $("tr:not(:contains('" + $(this).text() + "'))").slice(1).hide();
+            });
+            $("#reset").click(function () {
+                $("tr").show();
+            });
+        } //end function
+        );
+
+    </script>
+    <button id="reset">Reset</button>
+    <div id="buttons"> </div>
+    
+    <div id="roles"></div>
+    
+    <table border='1'>
+        <tr>
+            <td>
+                Name
+            </td>
+            <td>
+                Role
+            </td>
+            <td>
+                House
+            </td>
+            <td>
+                Gender
+            </td>
+            <td>
+                Aligns
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
