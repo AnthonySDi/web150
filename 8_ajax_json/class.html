@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        data.list[0].dt_txt;
+        data.list[0].main.Temp_min;
+
+        for(i in data.list)
+        {
+            console.log(data.list[i].main.Temp_min);
+        })
+
+
+        $('form button, form input[type=submit]').on('click', function(e) {
+            //cancel the normal form submission behavior
+            e.preventDefault();
+
+            //gather up the form's values
+            var form = $(this).closest('form');
+            var formData = form.serialize();
+            console.log(formData);
+
+            //send the request
+            $.post(URL,formData,function(result, status){
+                if (status == "success") {
+                    //replace the form contents with the response
+                    form.html(response + "x");
+                } else {
+                    form.html("Sorry, something's gone wrong. Please try again later.");
+                }
+            });
+            //temporarily replace the form, to prevent double-submit
+            // this happens before post completes
+            form.html("Please wait...");
+        });
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Fun With Weathers</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>    
+
+    
+</head>
+<body>
+    <h1>five days of weather</h1>
+    <h2>Chance of Fun</h2>
+    <form>
+        <h3>Find your weather</h3>
+        <p>Enter US City: <input id="City" type="text" placeholder="city, US" /></p>
+        <input id="Submit" type="submit" value="Submit" />
+    </form>
+    <ul id="days">
+
+    </ul>
+
+<script>
+    $(function () {
+
+
+        $('form button, form input[type=submit]').on('click', function (e) {
+
+            var $days = $('#days');
+            var $city = $('#City');  //dont know if we'll need this one
+            var $TextInput = $("input:text");
+            var $textVal = /\d+/g;
+            var $days = $('#days')
+                //cancel the normal form submission behavior
+                e.preventDefault();
+                //get the value entered by the user
+                var newText = $TextInput.val();
+                //Validate the text     
+                //gather up the form's values
+                
+                console.log(newText);
+
+
+                if ($textVal.test(newText)) {
+                    alert('Please spell a city with letters');
+                }else{
+                    $.ajax({url: 'http://api.openweathermap.org/data/2.5/forecast?q=' + newText + ',US&units=imperial&APPID=6657bf980389515c467e6c2b040678e9', 
+                        success: function(result){
+                            // handle successful request
+                            console.log(result)
+                            for(i=0; i <result.list.length; i+=8)
+                                {
+                                $days.append(
+                                '<li> Date: ' + result.list[i].dt_txt + '<ul><li> Temperatures: ' + result.list[i].main.temp_min + '/' + result.list[i].main.temp_max + '</li><li> Humidity: ' + result.list[i].main.humidity + '</li><li> Description: ' + result.list[i].weather[0].description + '</li><li><img src="http://openweathermap.org/img/w/' + result.list[i].weather[0].icon + '.png" alt="img of weather"></li></ul></li>'
+                                )}
+                        },
+                        error: function(xhr, status, error){
+                            // code to perform if request failed
+                            alert('Loser');
+                        },
+                    }); 
+                }
+                }
+            )});
+
+            
+      
+
+
+</script>
+    <!--6657bf980389515c467e6c2b040678e9-->
+   
+</body>
+</html>
